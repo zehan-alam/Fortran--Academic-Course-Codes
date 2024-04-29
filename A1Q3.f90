@@ -1,0 +1,37 @@
+PROGRAM CHEBYSHEV
+    IMPLICIT NONE
+    REAL :: F, X1, X0, F1, F11, TEMP,TOL
+    X0 = 1.5
+    TOL = .00000001
+
+    DO
+        X1 = X0 - (F(X0)/F1(X0)) - 0.5*((((F(X0))**2)*F11(X0))/(F1(X0))**3)
+        TEMP = X0
+        X0 = X1
+
+        IF(ABS(TEMP - X1) < TOL)EXIT
+    END DO
+    WRITE(*,*) 'APPROXIMATE ROOT: '
+    WRITE(*,*) X1
+END PROGRAM
+    
+FUNCTION F(X)
+    IMPLICIT NONE
+    REAL :: F, X
+    F = X**3 - 2*X -5
+    RETURN
+END FUNCTION
+
+FUNCTION F1(X)
+    IMPLICIT NONE
+    REAL :: F1, X
+    F1 = 3*X**2 - 2
+    RETURN
+END FUNCTION
+
+FUNCTION F11(X)
+    IMPLICIT NONE
+    REAL :: F11, X
+    F11 = 6*X
+    RETURN
+END FUNCTION
